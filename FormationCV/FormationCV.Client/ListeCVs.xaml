@@ -1,0 +1,49 @@
+﻿<Window x:Class="FormationCV.Client.ListeCVs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FormationCV.Client"
+        xmlns:VM="clr-namespace:FormationCV.Client.Models"
+        mc:Ignorable="d"
+        Title="CVs" Height="450" Width="800" Loaded="RafraichirListe">
+    <Window.DataContext>
+        <VM:ListeCvsVM></VM:ListeCvsVM>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ItemsControl HorizontalContentAlignment="Stretch" x:Name="ListboxCVs" ItemsSource="{Binding CVs}"   >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Titre}"></TextBlock>
+                            <TextBlock Text=" "></TextBlock>
+                            <TextBlock Text="{Binding Nom}"></TextBlock>
+                            <TextBlock Text=" "></TextBlock>
+                            <TextBlock Text="{Binding Prenom}"></TextBlock>
+                        </StackPanel>
+                        <Button Grid.Column="1" Click="DetailsCV">...</Button>
+                        <Button Grid.Column="2" Click="SuppressionCV">-</Button>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Click="AjoutCV" >+</Button>            
+            <Button Grid.Column="1" Click="RafraichirListe">Rafraichir</Button>
+        </Grid>
+    </Grid>
+</Window>

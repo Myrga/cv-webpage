@@ -1,0 +1,66 @@
+﻿body {
+    font-family: 'Calibri Light';
+    margin: 50px;
+}
+
+.presentation {
+    margin-bottom: 20px;
+}
+
+#nom {
+    color: rgb(31, 56, 100);
+    font-size: 24px;
+    font-family: calibri;
+}
+
+#titre {
+    color: rgb(90, 90, 90);
+    font-size: 20px;
+    font-family: calibri;
+}
+
+.section:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.informations-complementaires {
+    width: 40%;
+    padding-right: 25px;
+}
+
+.formation:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.gros-titre {
+    color: rgb(31, 56, 100);
+    font-size: 22px;
+    text-transform: uppercase;
+    font-family: calibri;
+}
+
+.moyen-titre {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: calibri;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.petit-titre {
+    font-family: 'Calibri Light';
+    font-weight: bold;
+}
+
+.sub-titre {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 16px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}

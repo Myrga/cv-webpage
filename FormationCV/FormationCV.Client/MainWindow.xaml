@@ -1,0 +1,87 @@
+﻿<Window x:Class="FormationCV.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FormationCV.Client"
+        xmlns:VM="clr-namespace:FormationCV.Client.Models"
+        xmlns:Entities="clr-namespace:FormationCV.Entities;assembly=FormationCV.Entities"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <VM:CVVM></VM:CVVM>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ObjectDataProvider x:Key="Niveaux" MethodName="GetValues"
+                        ObjectType="{x:Type Entities:Niveau}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="Entities:Niveau"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <DataTemplate x:Key="LangueItemTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Label}"></TextBlock>
+                    <TextBlock Text=" "></TextBlock>
+                    <TextBlock Text="{Binding Niveau}" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="LangueSelectedTemplate">
+                <StackPanel Background="Red">
+                    <TextBox Text="{Binding Label}"></TextBox>
+                    <ComboBox ItemsSource="{Binding Source={StaticResource  Niveaux}}" SelectedValue="{Binding Niveau}" />
+                    <Button>Supprimer</Button>                    
+                </StackPanel>
+            </DataTemplate>
+            <Style TargetType="{x:Type ListBoxItem}" x:Key="LanguesContainerStyle">
+                <Setter Property="ContentTemplate" Value="{StaticResource LangueItemTemplate}" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="ContentTemplate" Value="{StaticResource LangueSelectedTemplate}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>            
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Label Target="{Binding ElementName=Nom}">Nom</Label>
+            <TextBox x:Name="Nom" />
+            <Label Target="{Binding ElementName=Prenom}">Prenom</Label>
+            <TextBox x:Name="Prenom" />
+            <Label Target="{Binding ElementName=DateDeNaissance}">Date de naissance</Label>
+            <TextBox x:Name="DateDeNaissance" />
+            <Separator Height="10"/>
+            <CheckBox x:Name="Permis" Content="Permis" />
+            <Separator Height="10"/>
+            <Label Target="{Binding ElementName=Rue}">Rue</Label>
+            <TextBox x:Name="Rue" />
+            <Label Target="{Binding ElementName=CodePostal}">Code Postal</Label>
+            <TextBox x:Name="CodePostal" />
+            <Label Target="{Binding ElementName=Commune}">Commune</Label>
+            <TextBox x:Name="Commune" />
+            <Separator Height="10" />
+            <Label>Ajouter :</Label>
+            <Button>Langue</Button>
+            <Button>Experience</Button>
+            <Button>Formation</Button>
+            <Button>Compétence</Button>            
+        </StackPanel>
+        <ListBox HorizontalContentAlignment="Stretch" Grid.Column="1" ItemsSource="{Binding Langues}" ItemContainerStyle="{StaticResource LanguesContainerStyle}" />
+    </Grid>
+</Window>

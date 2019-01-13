@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "meyer-reset@2.0",
+      "destination": "wwwroot/lib/reset",
+      "files": [
+        "reset.min.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "twitter-bootstrap@4.2.1",
+      "destination": "wwwroot/lib/twitter-bootstrap/"
+    }
+  ]
+}

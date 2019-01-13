@@ -1,0 +1,134 @@
+﻿@model FormationCV.Front.ViewModels.CVVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model.Erreur != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @Model.Erreur
+    </div>
+}
+
+<header class="row my-4">
+    <div class="col">
+        <span class="oi oi-person mr-2"></span>
+        <h1 id="nom" class="d-inline" data-cv-event="displayText" data-cv-text="Bonjour, voici mon super CV en Bootstrap.">@Model.Nom @Model.Prenom</h1>
+        <h2 id="titre" data-cv-event="displayText" data-cv-text="Un autre texte.">@Model.Titre</h2>
+    </div>
+</header>
+
+<main class="row">
+    <aside class="col-md-3 order-1 order-md-0">
+        <section class="section position-relative">
+            <span class="oi oi-magnifying-glass position-absolute top-0 right-0 details"></span>
+            <h1 class="gros-titre" data-cv-toggle="collapse" data-cv-target=".skill-item">Compétences</h1>
+            <ul class="competences">
+                @foreach (var competence in Model.Competences)
+                {
+                    <li class="skill-item">@competence.Label</li>
+                }
+            </ul>
+        </section>
+
+        <section class="section">
+            <h1 class="gros-titre">Formations</h1>
+            <ul>
+                @foreach (var formation in Model.Formations)
+                {
+                    <li class="formation">
+                        <p class="m-0">@formation.DateDebut.ToString("yyyy") - @formation.DateFin.ToString("yyyy")</p>
+                        <p class="m-0">@formation.Diplome @formation.Intitule</p>
+                        @if (formation.Description != null && formation.Description != "")
+                        {
+                            <p>@formation.Description</p>
+                        }
+                        <p class="m-0">@formation.Ecole</p>
+                    </li>
+                }
+            </ul>
+        </section>
+
+        <section class="section">
+            <h1 class="gros-titre">Informations</h1>
+
+            <div>
+                <address class="m-0">
+                    @Model.NumeroDeRue @Model.Rue <br />
+                    @Model.Commune @Model.CodePostal <br />
+                    <a href="tel:06 62 31 81 71">06 62 31 81 71</a> <br />
+                    <a href="mailto:myriam.abdelfattah@gmail.com">myriam.abdelfattah@gmail.com</a>
+                </address>
+                @if (Model.Permis)
+                {
+                    <p class="m-0">Permis B</p>
+                }
+            </div>
+        </section>
+    </aside>
+
+    <article id="experience" class="col order-0 order-md-1 offset-1">
+        <h1 class="gros-titre">Expérience</h1>
+        <span class="btn btn-info" id="collapseButton">Collapse all</span>
+
+        @foreach (var experience in Model.Experiences)
+        {
+            <section class="section mb-4">
+                <span class="oi oi-chevron-bottom cv-collapse cv-collapse-open"></span>
+                <h2 class="moyen-titre titre-experience d-inline mr-2">@experience.Entreprise</h2>
+                <span class="oi oi-pencil icon-modif-experience" data-toggle="modal"
+                      data-target="#modal-modif-experience-@experience.Id" title="Modifier l'expérience"></span>
+                <button class="btn btn-success" data-cv-toggle="collapse" data-cv-target="#experience_@experience.Id" data-cv-text-afficher="Afficher" data-cv-text-masquer="Masquer" data-cv-default-collapse="false"></button>
+
+                <div id="experience_@experience.Id" class="experience">
+                    <p class="sub-titre m-0">@experience.DateDebut.ToString("MMMM yyyy") @experience.DateFin?.ToString("- MMMM yyyy")</p>
+                    <p class="petit-titre m-0">@experience.Poste</p>
+                    <p class="m-0">@experience.Description</p>
+                </div>
+
+                <form method="POST" action="/Home/ModifierExperience" class="submit-modif-experience" id="experience_form_@experience.Id">
+                    <div class="modal fade" id="modal-modif-experience-@experience.Id" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modification de l'expérience <span class="font-weight-bold">@experience.Entreprise</span></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="experience_Entreprise_@experience.Id">Entreprise</label>
+                                        <input type="text" class="form-control" id="experience_Entreprise_@experience.Id" value="@experience.Entreprise" name="Entreprise" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="experience_Date_Debut_@experience.Id">Date de début</label>
+                                        <input type="date" class="form-control" id="experience_Date_Debut_@experience.Id" value="@experience.DateDebut.ToString("yyyy-MM-dd")" name="DateDebut" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="experience_Date_Fin_@experience.Id">Date de fin</label>
+                                        <input type="date" id="experience_Date_Fin_@experience.Id" class="form-control" value="@experience.DateFin?.ToString("yyyy-MM-dd")" name="DateFin" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="experience_poste_@experience.Id">Poste</label>
+                                        <input class="form-control" id="experience_poste_@experience.Id" type="text" name="Poste" value="@experience.Poste" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="experience_description_@experience.Id">Description</label>
+                                        <textarea class="form-control" id="experience_description_@experience.Id" rows="3" name="Description" required>@experience.Description</textarea>
+                                    </div>
+                                    <input type="hidden" value="@experience.Id" name="Id" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" data-form-target="experience_form_@experience.Id">Modifier l'expérience</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        }
+    </article>
+</main>

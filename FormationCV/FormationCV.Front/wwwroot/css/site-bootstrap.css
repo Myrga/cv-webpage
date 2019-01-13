@@ -1,0 +1,63 @@
+﻿#nom {
+    color: rgb(31, 56, 100);
+    font-size: 24px;
+    font-family: calibri;
+}
+
+#titre {
+    color: rgb(90, 90, 90);
+    font-size: 20px;
+    font-family: calibri;
+}
+
+.gros-titre {
+    color: rgb(31, 56, 100);
+    font-size: 22px;
+    text-transform: uppercase;
+    font-family: calibri;
+}
+
+.moyen-titre {
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: calibri;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.petit-titre {
+    font-family: 'Calibri Light';
+    font-weight: bold;
+}
+
+.sub-titre {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.left-0 {
+    left: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.details {
+    display: none;
+}
+
+section:hover .details {
+    display: block;
+    cursor: pointer;
+}
+
+.icon-modif-experience {
+    cursor: pointer;
+}
+
+.mettre-en-plus-gros {
+    font-size: 50px;
+}
