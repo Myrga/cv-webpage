@@ -1,0 +1,49 @@
+﻿@model FormationCV.Front.ViewModels.CVVM
+<main>
+    <h1 class="text-center mb-md-2">Créer un nouveau CV</h1>
+    <div class="row justify-content-center">
+        <form method="post" action="/Home/CreateCV" class="col-md-6 col-auto">
+            <div class="form-group">
+                <label for="Titre">Titre</label>
+                @Html.TextBoxFor(m => m.Titre, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Nom">Nom</label>
+                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="Prenom">Prénom</label>
+                @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="DateDeNaissance">Date de naissance</label>
+                @Html.TextBoxFor(m => m.DateDeNaissance, new { @class = "form-control", type = "date" })
+            </div>
+            <div class="form-group">
+                <label for="NumeroDeRue">Numéro de rue</label>
+                @Html.TextBoxFor(m => m.NumeroDeRue, new { @class = "form-control", type="number"})
+            </div>
+            <div class="form-group">
+                <label for="Rue">Rue</label>
+                @Html.TextBoxFor(m => m.Rue, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="CodePostal">Code postal</label>
+                @Html.TextBoxFor(m => m.CodePostal, new { @class = "form-control", type = "number" })
+            </div>
+            <div class="form-group">
+                <label for="Commune">Commune</label>
+                @Html.TextBoxFor(m => m.Commune, new { @class = "form-control" })
+            </div>
+            <div class="form-check mb-3">
+                @Html.CheckBoxFor(m => m.Permis, new { @class = "form-check-input" })
+                <label class="form-check-label" for="Permis">
+                    Permis
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-info d-block m-auto">Créer un nouveau CV</button>
+        </form>
+    </div>
+</main>
+

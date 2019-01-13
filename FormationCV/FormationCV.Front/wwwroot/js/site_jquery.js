@@ -52,17 +52,17 @@
     }
 
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1", true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
-            let content = response[0].content;
-            document.body.insertAdjacentHTML('afterbegin', content);
-            console.log(xhr.responseText);
-        }
-    };
-    xhr.send(null);
+    //let xhr = new XMLHttpRequest();
+    //xhr.open("GET", "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1", true);
+    //xhr.onreadystatechange = function () {
+    //    if (xhr.readyState === 4 && xhr.status === 200) {
+    //        let response = JSON.parse(xhr.responseText);
+    //        let content = response[0].content;
+    //        document.body.insertAdjacentHTML('afterbegin', content);
+    //        console.log(xhr.responseText);
+    //    }
+    //};
+    //xhr.send(null);
 
     document.querySelectorAll(".submit-modif-experience").forEach(function (form) {
         form.addEventListener("submit", function (event) {

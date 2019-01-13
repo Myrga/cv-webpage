@@ -8,6 +8,7 @@ using FormationCV.Front.Models;
 using FormationCV.Data;
 using FormationCV.Front.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using FormationCV.Entities;
 
 namespace FormationCV.Front.Controllers
 {
@@ -62,6 +63,34 @@ namespace FormationCV.Front.Controllers
                 }).FirstOrDefault(cv => cv.Id == 1005);
 
                 return View("Index_bootstrap", CV);
+            }
+        }
+
+        public IActionResult CreateCV()
+        {
+            return View(new CVVM());
+        }
+
+        [HttpPost]
+        public IActionResult CreateCV(CVVM cv)
+        {
+            using (var context = new Context())
+            {
+                context.CVs.Add(new CV
+                {
+                    CodePostal = cv.CodePostal.GetValueOrDefault(),
+                    Commune = cv.Commune,
+                    DateDeNaissance = cv.DateDeNaissance,
+                    Nom = cv.Nom,
+                    NumeroDeRue = cv.NumeroDeRue.GetValueOrDefault(),
+                    Permis = cv.Permis,
+                    Prenom = cv.Prenom,
+                    Rue = cv.Rue,
+                    Titre = cv.Titre
+                    
+                });
+                context.SaveChanges();
+                return View("CreateCV", new CVVM());
             }
         }
 
